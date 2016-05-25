@@ -16,8 +16,15 @@
     </div>
     <div data-role="content" class="ui-content">
       <div class="ui-field-contain">
-        <label for="voter">Input Your ID</label>
-        <input type="text" name="voter" id="voter" value="" data-clear-btn="true">
+        <label for="voter">ID:</label>
+        <input type="text" name="voterid" id="voterid" value="" >
+        <label for="contender-1">Input The First Candidate:</label>
+        <input type="text" name="contender-1" id="contender_1" value="" data-clear-btn="true">
+        <label for="contender-2">Input The Second Candidate:</label>
+        <input type="text" name="contender-2" id="contender_2" value="" data-clear-btn="true">
+        <label for="contender-3">Input The Third Candidate:</label>
+        <input type="text" name="contender-3" id="contender_3" value="" data-clear-btn="true">
+      </div>
       </div>
       <input type='button' onclick='set_item()' value='Save'/>
     </div>
@@ -52,10 +59,13 @@
 function set_item(){
   var data = {};
 
-  data['name_1'] = $("#voter").val();
-  localStorage.setItem('Voter',JSON.stringify(data));
+  data['voter'] = $("#voterid").val();
+  data['name_1'] = $("#contender_1").val();
+  data['name_2'] = $("#contender_2").val();
+  data['name_3'] = $("#contender_3").val();
+  localStorage.setItem('Vote_Info',JSON.stringify(data));
 
-  var VoterInfo = JSON.parse(localStorage.getItem('Voter'));
+  var VoterInfo = JSON.parse(localStorage.getItem('Vote_Info'));
 
   //QRページへ遷移する
   $.mobile.changePage("#QRPage", {
