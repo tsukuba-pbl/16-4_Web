@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jasmine Spec Runner v2.3.4</title>
+ 
+    <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.4.1/jasmine_favicon.png">
+    <link rel="stylesheet" href="lib/jasmine-2.4.1/jasmine.css">
+ 
+    <script src="lib/jasmine-2.4.1/jasmine.js"></script>
+    <script src="lib/jasmine-2.4.1/jasmine-html.js"></script>
+    <script src="lib/jasmine-2.4.1/boot.js"></script>
+    
+    <script src="../sample.js"></script>
+    
+    <script>
+        describe('テストの見出し', function () {
+            var obj1 = {'foo': 'bar'},
+                obj2 = {'foo': 'bar'};
+            var obj3 = obj1;
+ 
+            it('obj1とobj2が同じオブジェクトか', function () {
+                expect(obj1).toBe(obj2);
+            });
+            
+            it('obj1とobj3が同じオブジェクトか', function () {
+                expect(obj1).toBe(obj3);
+            });
+            
+            it("同じ配列か", function(){
+                expect(['foo', 'bar', 'baz']).toEqual(sample()); 
+            });
+        });
+    </script>
+</head>
+ 
+<body>
+</body>
+</html>
