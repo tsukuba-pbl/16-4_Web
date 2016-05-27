@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-  <script type="text/javascript" src="qrcode.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script type="text/javascript" src="js/set_item.js"></script>
 </head>
 
 <body>
@@ -47,30 +48,5 @@
       <h1>ts_quartetto</h1>
     </div>
   </div>
-
-<script>
-//TEXTフォームのデータを取得してJSONでWebStorageに保存
-function set_item(){
-  var data ={};
-
-  data['name_1'] = $("#contender_1").val();
-  data['name_2'] = $("#contender_2").val();
-  data['name_3'] = $("#contender_3").val();
-
-  localStorage.setItem('Candidate',JSON.stringify(data));
-
-  var CandidateInfo = JSON.parse(localStorage.getItem('Candidate'));
-  $.mobile.changePage("#QRPage", {
-    changeHash: true
-  });
-
-//QRCodeに入れたい中身を引数に入れる。引数の型はString
-  (function(){
-				new QRCode(document.getElementById('qrcode'),JSON.stringify(CandidateInfo));
-			}
-	)();
-}
-
-</script>
 </body>
 </html>
