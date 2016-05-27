@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-  <script type="text/javascript" src="qrcode.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script type="text/javascript" src="js/set_item.js"></script>
 </head>
 
 <body>
@@ -53,32 +54,5 @@
       <h1>ts_quartetto</h1>
     </div>
   </div>
-
-<script>
-//テキストフォームから入力されたデータを取得する
-function set_item(){
-  var data = {};
-
-  data['voter'] = $("#voterid").val();
-  data['name_1'] = $("#contender_1").val();
-  data['name_2'] = $("#contender_2").val();
-  data['name_3'] = $("#contender_3").val();
-  localStorage.setItem('Vote_Info',JSON.stringify(data));
-
-  var VoterInfo = JSON.parse(localStorage.getItem('Vote_Info'));
-
-  //QRページへ遷移する
-  $.mobile.changePage("#QRPage", {
-    changeHash: false
-  });
-
-  //QRCodeに入れたい中身を引数に入れる。引数の型はString
-  (function(){
-				new QRCode(document.getElementById('qrcode'),JSON.stringify(VoterInfo));
-			}
-	)();
-}
-
-</script>
 </body>
 </html>
