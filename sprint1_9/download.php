@@ -1,8 +1,8 @@
 <?php
     //ダウンロードさせるファイル名
-    $tmp_file = "./csv/議事録.txt";
+    $tmp_file = "./csv/target.csv";
     //保存させる際のファイル名
-    $j_file = "議事録.txt";
+    $j_file = "投票結果.csv";
     //日本語対応
     $tmp_file = mb_convert_encoding($tmp_file, "SJIS", "AUTO");
     //日本語対応
