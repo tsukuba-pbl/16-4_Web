@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script type="text/javascript" src="js/set_item.js"></script>
+  <script>
+    $(function() {
+      $.getJSON("data.json" , function(data) {
+        var
+          ulObj = $("#demo"),
+          len = data.length;
+
+          for (var i=0; i<len; i++) {
+            ulObj.append($("<input>").attr({"id":"contender"+(i+1)}, {"name":"contender"+(i+1)}, {"type":"checkbox"}, {"value":""}));
+            //ulObj.append($("<label>").attr({"for":"contender"+(i+1)}).text("ID:"+data[i].id+" 名前"+data[i].name+" タイトル"+data[i].title));
+          }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div data-role="page" id="mainPage">
+    <div data-role="header">
+     <h1>投票者は候補者を選択できる</h1>
+    </div>
+
+    <!-- 候補者入力 -->
+    <div data-role="content" class="ui-content">
+      <div class="ui-field-contain">
+        <fieldset data-role="controlgroup">
+            <legend id="demo">候補者リスト</legend>
+
+      </div>
+      <input type='button' onclick='set_item()' value='Save'/>
+    </div>
+
+    <div data-role="footer">
+      <h1>ts_quartetto</h1>
+    </div>
+  </div>
+
+  <!-- QRCodeを表示するページ -->
+  <div data-role="page" id="QRPage">
+    <div data-role="header">
+      <h1>QR Code</h1>
+    </div>
+    <div data-role="content" class="ui-content">
+      <div class="example">
+        <div id="qrcode">
+        </div>
+      </div>
+    </div>
+    <div data-role="footer">
+      <h1>ts_quartetto</h1>
+    </div>
+  </div>
+</body>
+</html>
