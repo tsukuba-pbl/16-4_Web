@@ -32,9 +32,10 @@
     <div data-role="header">
      <h1>Vote</h1>
     </div>
+    <div><img id="thumbnail" src=""></div>
     <div data-role="content" class="ui-content">
       <div class="ui-field-contain">
-        <input type="file" accept="image/*">
+        <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
         <label for="contender-1">Input The First Candidate:</label>
         <input type="text" name="contender-1" id="contender_1" value="" data-clear-btn="true">
         <label for="contender-2">Input The Second Candidate:</label>
@@ -67,5 +68,23 @@
       <h1>ts_quartetto</h1>
     </div>
   </div>
+  <script>
+    $('#upfile').change(function(){
+      if (this.files.length > 0) {
+        // 選択されたファイル情報を取得
+        var file = this.files[0];
+
+        // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function(){
+          //load(reader.result);
+          console.log(reader.result);
+          $('#thumbnail').attr('src', reader.result);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
