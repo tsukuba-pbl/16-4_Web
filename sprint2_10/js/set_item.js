@@ -17,7 +17,6 @@ function set_item(){
 
   //QRCodeに入れたい中身を引数に入れる。引数の型はString
   (function(){
-				new QRCode(document.getElementById('qrcode'),JSON.stringify(VoterInfo));
-			}
-	)();
+    new QRCode(document.getElementById('qrcode'),JSON.stringify(VoterInfo));
+  })();
 }
