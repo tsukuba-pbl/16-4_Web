@@ -79,7 +79,8 @@ function load()
 {
 	initCanvas(640,480);
 	qrcode.callback = read;
-	qrcode.decode("meqrthumb.png");
+	//qrcode.decode("meqrthumb.png");
+	qrcode.decode("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAIAAACTCYeWAAABcklEQVR4nO2cyQ7CMAxECer//3K5cEilWoqxJxV6826UZhmNjLMyXgLO87x9PsaQls3ybq/xj7B4Ksf8IYq3FbLxPL+fbbern2jnLZ7KEX1RyclRPfP7K/k8W39EVA/aeYunEsa8mkqe7wLtvMVTeSzmo3H+TtDOWzyVMOYVuTeK7Ur8V/qJdt7iqVxiXp1vu3J7Vz/Rzls8laGeS1dyu7pvaOctnsol2LrycNdemro/aOctnsrSGl42hrvW5Cvxv7IXiHbe4qmEwdN1li4bt5VzOyttzc/Rzls8ldF1Ni7dsGAsEOGx/Q0WTyW9hteVtyN2/tagnbd4KlvX7Z86hxO1i3be4qlIAq9ylj47J6+URTtv8VTCvbp0Rcl469p783z+RyyeivxeXbas+o6tx/ZfLJ7K1js2XeftonpW6vfY/ovFU3nsXt1Mdl7Q9V86aOctnor8Xl1lDK8Y/8+gnbd4KvJ1e8V6e3aO4HX7GyyeygdqHOqRb956FAAAAABJRU5ErkJggg==");
 }
 
 function initCanvas(ww,hh)

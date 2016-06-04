@@ -42,17 +42,17 @@ function handleFiles(f)
       // Read in the image file as a data URL.
       reader.readAsDataURL(f[i]);	}
 }
-	
+//読み込んだ後のコールバック
 function read(a)
 {
 	alert(a);
 }	
 	
-function load()
+function load(src)
 {
 	initCanvas(640,480);
 	qrcode.callback = read;
-	qrcode.decode("meqrthumb.png");
+	qrcode.decode(src);
 }
 
 function initCanvas(ww,hh){

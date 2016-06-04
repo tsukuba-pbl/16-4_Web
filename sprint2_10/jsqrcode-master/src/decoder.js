@@ -56,6 +56,7 @@ Decoder.correctErrors=function( codewordBytes,  numDataCodewords)
 
 Decoder.decode=function(bits)
 {
+    //console.log(bits);
 	var parser = new BitMatrixParser(bits);
 	var version = parser.readVersion();
 	var ecLevel = parser.readFormatInformation().ErrorCorrectionLevel;

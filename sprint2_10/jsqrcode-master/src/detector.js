@@ -124,6 +124,7 @@ function DetectorResult(bits,  points)
 
 function Detector(image)
 {
+    //console.log(image);
 	this.image=image;
 	this.resultPointCallback = null;
 	

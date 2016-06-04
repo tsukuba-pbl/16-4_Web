@@ -32,7 +32,6 @@
     <div data-role="header">
      <h1>Vote</h1>
     </div>
-    <div><img id="thumbnail" src=""></div>
     <div data-role="content" class="ui-content">
       <div class="ui-field-contain">
         <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
@@ -45,12 +44,12 @@
       </div>
     </div>
     <input type='button' onclick='set_item()' value='Save'/>
+    <canvas id="qr-canvas" width="640" height="480"></canvas>
+    <div data-role="footer">
+      <h1>ts_quartetto</h1>
+    </div>
   </div>
-  <div data-role="footer">
-    <h1>ts_quartetto</h1>
-  </div>
-
-
+  
   <!-- QRCodeを表示するページ -->
   <div data-role="page" id="QRPage">
 
@@ -69,8 +68,10 @@
       <h1>ts_quartetto</h1>
     </div>
   </div>
+  
   <script>
     $('#upfile').change(function(){
+      
       if (this.files.length > 0) {
         // 選択されたファイル情報を取得
         var file = this.files[0];
@@ -80,11 +81,10 @@
         reader.readAsDataURL(file);
 
         reader.onload = function(){
-          //load(reader.result);
+          load(reader.result);
           console.log(reader.result);
-          $('#thumbnail').attr('src', reader.result);
         }
-      }
+      }      
     });
   </script>
 </body>

@@ -44,6 +44,7 @@ qrcode.decode = function(src){
     else
     {
         var image = new Image();
+        //console.log(image);
         image.onload=function(){
             //var canvas_qr = document.getElementById("qr-canvas");
             var canvas_qr = document.createElement('canvas');
@@ -59,7 +60,7 @@ qrcode.decode = function(src){
 
             canvas_qr.width = nwidth;
             canvas_qr.height = nheight;
-            
+            //console.log(image);
             context.drawImage(image, 0, 0, canvas_qr.width, canvas_qr.height );
             qrcode.width = canvas_qr.width;
             qrcode.height = canvas_qr.height;
@@ -81,9 +82,12 @@ qrcode.decode = function(src){
                 console.log(e);
                 qrcode.result = "error decoding QR Code";
             }
-            if(qrcode.callback!=null)
+            if(qrcode.callback!=null){
+                //console.log(qrcode.result);
                 qrcode.callback(qrcode.result);
+            }
         }
+        //console.log(src);
         image.src = src;
     }
 }
@@ -128,7 +132,7 @@ qrcode.decode_utf8 = function ( s )
 qrcode.process = function(ctx){
     
     var start = new Date().getTime();
-
+    //console.log(qrcode);
     var image = qrcode.grayScaleToBitmap(qrcode.grayscale());
     //var image = qrcode.binarize(128);
     
@@ -150,7 +154,7 @@ qrcode.process = function(ctx){
     //var finderPatternInfo = new FinderPatternFinder().findFinderPattern(image);
     
     var detector = new Detector(image);
-
+    //console.log(image);
     var qRCodeMatrix = detector.detect();
     
     /*for (var y = 0; y < qRCodeMatrix.bits.Height; y++)
@@ -178,7 +182,7 @@ qrcode.process = function(ctx){
     var end = new Date().getTime();
     var time = end - start;
     console.log(time);
-    
+    console.log("str = " +str);
     return qrcode.decode_utf8(str);
     //alert("Time:" + time + " Code: "+str);
 }
