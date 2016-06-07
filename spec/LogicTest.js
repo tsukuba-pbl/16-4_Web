@@ -11,8 +11,9 @@ describe("TestSample> ", function(){
 		})
 	});
 });
-describe('Hello Test', () => {
-    it('Test', () => {
+
+describe('Hello Test', function(){
+    it('Test', function(){
         var targetText = 'ふがふが'; // ここを変更
         var expectText = 'ふがふが';
         expect(expectText).toBe(targetText);

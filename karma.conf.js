@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Tue Jun 07 2016 15:11:20 GMT+0900 (東京 (標準時))
+// Generated on Tue Jun 07 2016 16:57:41 GMT+0900 (東京 (標準時))
 
 module.exports = function(config) {
   config.set({
@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
     	'Logic.js',
-        'spec/LogicTest.js'
+    	'spec/LogicTest.js'
     ],
 
 
@@ -29,8 +29,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
     },
-
-
+	
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -56,7 +55,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
