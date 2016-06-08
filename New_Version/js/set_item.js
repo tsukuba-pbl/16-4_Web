@@ -20,10 +20,10 @@ function set_item(){
     for(i = 0;i < N;i++){
         //IDが入っている場合
         if(selected_id[i] !== undefined){
-            selected_id_json["name_"+i+1] = selected_id[i];
+            selected_id_json["name_"+(i+1)] = selected_id[i];
         //IDが入っていない場合(undefined)
         }else{
-            selected_id_json["name_"+i+1] = null;
+            selected_id_json["name_"+(i+1)] = null;
         }
         //console.log(selected_id_json["name_"+i]);
     }
