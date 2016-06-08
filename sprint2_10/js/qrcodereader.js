@@ -47,7 +47,7 @@ function read(a)
 {
 	alert(a);
 	$('#voterid').val(a);
-	$('#YourID').after("<p>あなたのIDは"+a+"です</p>");
+	$('#YourID').after("<p>Your ID Is "+a+".</p>");
 }
 
 function load(src)
