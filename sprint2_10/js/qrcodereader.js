@@ -5,8 +5,8 @@ var gCtx = null;
 	var ii=0;
 	var jj=0;
 	var c=0;
-	
-	
+
+
 function dragenter(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -46,8 +46,9 @@ function handleFiles(f)
 function read(a)
 {
 	alert(a);
-}	
-	
+	$('#voterid').val(a);
+}
+
 function load(src)
 {
 	initCanvas(640,480);
@@ -57,8 +58,8 @@ function load(src)
 
 function initCanvas(ww,hh){
   gCanvas = document.getElementById("qr-canvas");
-  gCanvas.addEventListener("dragenter", dragenter, false);  
-  gCanvas.addEventListener("dragover", dragover, false);  
+  gCanvas.addEventListener("dragenter", dragenter, false);
+  gCanvas.addEventListener("dragover", dragover, false);
   gCanvas.addEventListener("drop", drop, false);
   var w = ww;
   var h = hh;
@@ -71,12 +72,12 @@ function initCanvas(ww,hh){
   imageData = gCtx.getImageData( 0,0,320,240);
 }
 
-function passLine(stringPixels) { 
+function passLine(stringPixels) {
   //a = (intVal >> 24) & 0xff;
 
   var coll = stringPixels.split("-");
-	
-  for(var i=0;i<320;i++) { 
+
+  for(var i=0;i<320;i++) {
 	var intVal = parseInt(coll[i]);
 	r = (intVal >> 16) & 0xff;
 	g = (intVal >> 8) & 0xff;
@@ -86,13 +87,13 @@ function passLine(stringPixels) {
 	imageData.data[c+2]=b;
     imageData.data[c+3]=255;
     c+=4;
-  } 
+  }
 
-      if(c>=320*240*4) { 
+      if(c>=320*240*4) {
 		c=0;
         gCtx.putImageData(imageData, 0,0);
-      } 
-  } 
+      }
+  }
   function captureToCanvas() {
 	flash = document.getElementById("embedflash");
 	flash.ccCapture();
