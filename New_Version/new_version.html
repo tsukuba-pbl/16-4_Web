@@ -73,12 +73,21 @@
                   NAME = data[i].name,
                   TITLE = data[i].title;
 
-                  checkboxContents += '<input type="checkbox" id="jsform_checkbox' + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/>'
+                  checkboxContents += '<input type="checkbox" id="jsform_checkbox' + i + '" name="name_'+(i+1)+'"'+' value="'+ID+'"/>'
                   checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + 'Name:' + NAME + 'Title:' + TITLE + '</label>';
         }
           checkboxContents += "</div>";
           $("#my_checkbox").empty().append(checkboxContents).trigger("create");
           $(document).ready(function() {
+
+          $("input[type='checkbox']").each(function(){
+              if ($(this).not("input:checked")){
+                  count = $(this).attr('name');
+                  CandidateID[count]=null;
+              }
+              localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
+          });
+
 
               $("input[type='checkbox']").change(function () {
                 if ($(this).is(":checked")) {
