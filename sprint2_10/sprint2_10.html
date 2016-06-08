@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
@@ -32,18 +33,18 @@
     <div data-role="header">
      <h1>Vote</h1>
     </div>
+    <!-- 候補者出力 -->
     <div data-role="content" class="ui-content">
-      <div class="ui-field-contain">
-        <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
-        <input type="hidden" name="voterid" id="voterid" value="">
-        <label for="contender-1">Input The First Candidate:</label>
-        <input type="text" name="contender-1" id="contender_1" value="" data-clear-btn="true">
-        <label for="contender-2">Input The Second Candidate:</label>
-        <input type="text" name="contender-2" id="contender_2" value="" data-clear-btn="true">
-        <label for="contender-3">Input The Third Candidate:</label>
-        <input type="text" name="contender-3" id="contender_3" value="" data-clear-btn="true">
+      <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
+      <input type="hidden" name="voterid" id="voterid" value="">
+      <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup" id="my_controlgroup">
+            <legend>候補者：</legend>
+            <div id="my_checkbox"></div>
+          </fieldset>
       </div>
     </div>
+
     <input type='button' onclick='set_item()' value='Save'/>
     <canvas id="qr-canvas" width="640" height="480"></canvas>
     <div data-role="footer">
@@ -87,6 +88,55 @@
         }
       }
     });
+  </script>
+
+  <script>
+      var CandidateID = {};
+      var data = {};
+      var count;
+      $(document).on('pagecreate',function(e, d) {
+
+          $.getJSON("data.json" , function(data) {
+              var checkboxContents = "",
+              len = data.length;
+
+              checkboxContents += "<div data-role='controlgroup'>";
+
+              for (var i=0; i<len; i++) {
+                  var ID = data[i].id,
+                  NAME = data[i].name,
+                  TITLE = data[i].title;
+
+                  checkboxContents += '<input type="checkbox" id="jsform_checkbox' + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/>'
+                  checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + 'Name:' + NAME + 'Title:' + TITLE + '</label>';
+        }
+          checkboxContents += "</div>";
+          $("#my_checkbox").empty().append(checkboxContents).trigger("create");
+          $(document).ready(function() {
+
+              $("input[type='checkbox']").change(function () {
+                if ($(this).is(":checked")) {
+                  count = $(this).attr('name');
+                  CandidateID[count] = $(this).val();
+                 }
+                else {
+                  count = $(this).attr('name');
+                  CandidateID[count]=null;
+
+                 }
+
+                 localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
+
+            });
+
+        });
+    });
+
+
+
+});
+
+
   </script>
 </body>
 </html>
