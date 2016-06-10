@@ -47,7 +47,8 @@ function read(a)
 {
 	alert(a);
 	$('#voterid').val(a);
-	$('#YourID').after("<p>Your ID Is "+a+".</p>");
+	$('#YourID').empty();
+	$('#YourID').append("<p>Your ID Is "+a+".</p>");
 }
 
 function load(src)
