@@ -23,7 +23,7 @@ function set_item(){
             selected_id_json["name_"+(i+1)] = selected_id[i];
         //IDが入っていない場合(undefined)
         }else{
-            selected_id_json["name_"+(i+1)] = "";
+            selected_id_json["name_"+(i+1)] = null;
         }
         //console.log(selected_id_json["name_"+i]);
     }
