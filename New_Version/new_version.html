@@ -6,26 +6,26 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-    <script type="text/javascript" src="js/qrcode.js"></script>
-    <script type="text/javascript" src="js/set_item.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/grid.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/version.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/detector.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/formatinf.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/errorlevel.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/bitmat.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/datablock.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/bmparser.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/datamask.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/rsdecoder.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/gf256poly.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/gf256.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/decoder.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/qrcode.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/findpat.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/alignpat.js"></script>
-    <script type="text/javascript" src="./jsqrcode-master/src/databr.js"></script>
-    <script type="text/javascript" src="./js/qrcodereader.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script type="text/javascript" src="js/set_item.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/grid.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/version.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/detector.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/formatinf.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/errorlevel.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/bitmat.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/datablock.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/bmparser.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/datamask.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/rsdecoder.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/gf256poly.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/gf256.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/decoder.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/qrcode.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/findpat.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/alignpat.js"></script>
+  <script type="text/javascript" src="./jsqrcode-master/src/databr.js"></script>
+  <script type="text/javascript" src="./js/qrcodereader.js"></script>
 </head>
 
 <body>
@@ -33,12 +33,16 @@
     <div data-role="header">
      <h1>Vote</h1>
     </div>
-    <!-- 候補者出力 -->
+    <!-- カメラで投票者ID入力 -->
     <div data-role="content" class="ui-content">
       <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
       <input type="hidden" name="voterid" id="voterid" value="">
+
+      <!--ID表示 -->
       <div id="YourID">
       </div>
+
+      <!-- JSONファイルの候補者をリスト表示 -->
       <div data-role="fieldcontain">
           <fieldset data-role="controlgroup" id="my_controlgroup">
             <legend>候補者：</legend>
@@ -93,52 +97,45 @@
   </script>
 
   <script>
-      var CandidateID = {};
-      var data = {};
-      var count;
-      $(document).on('pagecreate',function(e, d) {
+    var CandidateID = {};
+    var data = {};
+    var count;
+    $(document).on('pagecreate',function(e, d) {
 
-          $.getJSON("data.json" , function(data) {
-              var checkboxContents = "",
-              len = data.length;
+        $.getJSON("data.json" , function(data) {
+            var checkboxContents = "",
+            len = data.length;
 
-              checkboxContents += "<div data-role='controlgroup'>";
+            checkboxContents += "<div data-role='controlgroup'>";
 
-              for (var i=0; i<len; i++) {
-                  var ID = data[i].id,
-                  NAME = data[i].name,
-                  TITLE = data[i].title;
+            for (var i=0; i<len; i++) {
+                var ID = data[i].id,
+                NAME = data[i].name,
+                TITLE = data[i].title;
 
-                  checkboxContents += '<input type="checkbox" id="jsform_checkbox' + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/>'
-                  checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + 'Name:' + NAME + 'Title:' + TITLE + '</label>';
-        }
-          checkboxContents += "</div>";
-          $("#my_checkbox").empty().append(checkboxContents).trigger("create");
-          $(document).ready(function() {
+                checkboxContents += '<input type="checkbox" id="jsform_checkbox' + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/>'
+                checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + 'Name:' + NAME + 'Title:' + TITLE + '</label>';
+            }
 
-              $("input[type='checkbox']").change(function () {
-                if ($(this).is(":checked")) {
-                  count = $(this).attr('name');
-                  CandidateID[count] = $(this).val();
-                 }
-                else {
-                  count = $(this).attr('name');
-                  CandidateID[count]=null;
+            checkboxContents += "</div>";
+            $("#my_checkbox").empty().append(checkboxContents).trigger("create");
 
-                 }
+            $(document).ready(function() {
+                $("input[type='checkbox']").change(function () {
+                  if ($(this).is(":checked")) {
+                    count = $(this).attr('name');
+                    CandidateID[count] = $(this).val();
+                   }
+                  else {
+                    count = $(this).attr('name');
+                    CandidateID[count]=null;
 
-                 localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
-
+                   }
+                  localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
+                });
             });
-
         });
-    });
-
-
-
-});
-
-
+      });
   </script>
 </body>
 </html>
