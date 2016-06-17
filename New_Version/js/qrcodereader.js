@@ -47,8 +47,10 @@ function read(a)
 {
 	alert(a);
 	$('#voterid').val(a);
+	result = a.split(",");
 	$('#YourID').empty();
-	$('#YourID').append("<p>Your ID Is "+a+".</p>");
+	$('#YourID').append("<p>"+result[0]+"</p>");
+	$('#YourID').append("<p>"+result[1]+"</p>");
 }
 
 function load(src)
