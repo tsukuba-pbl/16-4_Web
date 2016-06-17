@@ -2,30 +2,35 @@
 function set_item(){
     var N = 3;  //投票する人数
     var temp = {};
-    var selected_id = [];
     var selected_id_json = {};
+    var error = "";
 
     data['voter'] = $("#voterid").val();
 
     temp=JSON.parse(localStorage.getItem('Candidate_ID'));
-    var i = 0;
+    var count = 0; //チェックしている候補者数
     //選択されているオブジェクトの値をselected_idに代入
     Object.keys(temp).forEach(function(key){
         if(temp[key] !== null){
-            selected_id[i] = temp[key];
-            i++;
+            //3人まではオブジェクトに入れていく
+            if(count < 3){
+                selected_id_json["name_"+(count+1)] = temp[key];
+            }
+            count++;
         }
     });
-    //{"name_1": id, "name_2": id, "name_3": null}を作成
-    for(i = 0;i < N;i++){
-        //IDが入っている場合
-        if(selected_id[i] !== undefined){
-            selected_id_json["name_"+(i+1)] = selected_id[i];
-        //IDが入っていない場合(undefined)
-        }else{
-            selected_id_json["name_"+(i+1)] = null;
-        }
-        //console.log(selected_id_json["name_"+i]);
+    //count数を見て候補者の選択数をチェック
+    if(count < 3){
+        console.log("count < 3");
+        error = "候補者を3名未満選んでます。候補者は3名まで選んでください";
+    }else if(count > 3){
+        console.log("count > 3");
+        error = "候補者を4名以上選んでます。候補者は3名選んでください";
+    }
+    //エラーがあったらalertして終了
+    if(error !== ""){
+        alert(error);
+        return;
     }
     //voterのデータと投票のデータのマージ
     var newdata = $.extend(data,selected_id_json);
@@ -34,15 +39,15 @@ function set_item(){
     localStorage.setItem('Vote_Info',JSON.stringify(newdata));
 
     var VoteInfo = JSON.parse(localStorage.getItem('Vote_Info'));
-
-    //QRページへ遷移する
+    
+    //QRコード表示ページに遷移
     $.mobile.changePage("#QRPage", {
         changeHash: true
     });
 
     //QRCodeに入れたい中身を引数に入れる。引数の型はString
     (function(){
-      $('#qrcode').empty();
-		new QRCode(document.getElementById('qrcode'),JSON.stringify(VoteInfo));
+        $('#qrcode').empty();
+            new QRCode(document.getElementById('qrcode'),JSON.stringify(VoteInfo));
 	})();
 }
