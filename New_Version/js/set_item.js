@@ -8,16 +8,16 @@ function set_item(){
     data['voter'] = $("#voterid").val();
 
     temp=JSON.parse(localStorage.getItem('Candidate_ID'));
-    var i = 0;
+    var count = 0; //チェックしている候補者数
     //選択されているオブジェクトの値をselected_idに代入
     Object.keys(temp).forEach(function(key){
         if(temp[key] !== null){
-            selected_id[i] = temp[key];
-            i++;
+            selected_id[count] = temp[key];
+            count++;
         }
     });
     //{"name_1": id, "name_2": id, "name_3": null}を作成
-    for(i = 0;i < N;i++){
+    for(var i = 0;i < N;i++){
         //IDが入っている場合
         if(selected_id[i] !== undefined){
             selected_id_json["name_"+(i+1)] = selected_id[i];
@@ -36,9 +36,15 @@ function set_item(){
     var VoteInfo = JSON.parse(localStorage.getItem('Vote_Info'));
 
     //QRページへ遷移する
-    $.mobile.changePage("#QRPage", {
-        changeHash: true
-    });
+    if(count == N) {
+      $.mobile.changePage("#QRPage", {
+          changeHash: true
+      });
+    }
+
+    else {
+      alert("現在選択している候補者は"+count+"名です。"+N+"名選んでください");
+    }
 
     //QRCodeに入れたい中身を引数に入れる。引数の型はString
     (function(){
