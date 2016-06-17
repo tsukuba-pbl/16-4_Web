@@ -45,15 +45,23 @@ function handleFiles(f)
 //読み込んだ後のコールバック
 function read(a)
 {
-	alert(a);
+
+
 	$('#voterid').val(a);
-	result = a.split(",");
+	var txt = a;
+	var judge = a.indexOf("voter_id");
+	if (judge != -1) {
+
+ 	alert(a);
+	var obj = JSON.parse(txt);
 	$('#YourID').empty();
 
-	$('#YourID').append("<p>"+result[0]+"</p>");
-	if (result[1] != null) {
-		$('#YourID').append("<p>"+result[1]+"</p>");
+	var stringid = obj.voter_id.toString();
+	var stringname = obj.voter_name.toString();
+	$('#YourID').append("<p>ID:"+stringid+"</p>");
+	$('#YourID').append("<p>Name:"+stringname+"</p>");
 	}
+	else alert("読み込みError");
 
 }
 
