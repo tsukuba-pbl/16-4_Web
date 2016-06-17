@@ -15,11 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css',
-        'https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js',
-        'https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js',
-        'New_Version/js/set_item.js',
-    	'spec/set_item_Test.js'
+    	'Logic.js',
+    	'spec/LogicTest.js'
     ],
 
 
@@ -32,7 +29,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
     },
-
+	
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter

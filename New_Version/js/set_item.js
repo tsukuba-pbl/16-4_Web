@@ -4,7 +4,6 @@ function set_item(){
     var temp = {};
     var selected_id_json = {};
     var error = "";
-    var data = {}; 
 
     data['voter'] = $("#voterid").val();
 
@@ -40,7 +39,7 @@ function set_item(){
     localStorage.setItem('Vote_Info',JSON.stringify(newdata));
 
     var VoteInfo = JSON.parse(localStorage.getItem('Vote_Info'));
-
+    
     //QRコード表示ページに遷移
     $.mobile.changePage("#QRPage", {
         changeHash: true
