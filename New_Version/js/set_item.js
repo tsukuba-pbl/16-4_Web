@@ -5,8 +5,8 @@ function set_item(){
     var selected_id_json = {};
     var error = "";
 
-    var voterinfo = $("#voterid").val();
-    var obj = JSON.parse(voterinfo);
+    var voterINFO = $("#voterid").val();
+    var obj = JSON.parse(voterINFO);
     data['voter_id'] = obj.voter_id.toString();
     data['voter_name'] = obj.voter_name.toString();
 
