@@ -46,6 +46,7 @@ function handleFiles(f)
 function read(a)
 {
 
+<<<<<<< HEAD
 	var txt = a;
 	var judge = a.indexOf("voter_id");
 
