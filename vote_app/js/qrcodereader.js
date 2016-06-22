@@ -45,10 +45,39 @@ function handleFiles(f)
 //読み込んだ後のコールバック
 function read(a)
 {
-	alert(a);
-	$('#voterid').val(a);
-	$('#YourID').empty();
-	$('#YourID').append("<p>Your ID Is "+a+".</p>");
+
+	var txt = a;
+	var judge = a.indexOf("voter_id");
+
+	$('#checkvote').val(0);	// 正しいQRコードが入力されたかのflag用
+
+	if (judge != -1) {
+
+		// 引数"a"はQRコードで読み込んだ時の内容で文字コードが"SJIS"である。文字コードを変換する際に文字列を配列にする必要がある
+		var str2array = function (str) {
+			var array = [], i, il=str.length;
+			for (i=0; i<il; i++) array.push(str.charCodeAt(i));
+			return array;
+		};
+
+		// SJISをUTF8に変換する
+		var array = str2array(txt),
+				utf8_array = Encoding.convert(array, "UNICODE", "SJIS"),
+				txt = Encoding.codeToString(utf8_array);
+
+		var obj = JSON.parse(txt);
+		var stringid = obj.voter_id.toString();
+		var stringname = obj.voter_name.toString();
+
+		alert(txt);
+		$('#checkvote').val(1);	//正しいQRコードがセットされたときに"1"を送る
+		$('#voterid').val(txt);	//QRコードの内容をinputタグのhiddenに入力する
+		$('#YourID').empty();
+		$('#YourID').append("<p>ID:"+stringid+"</p>");
+		$('#YourID').append("<p>Name:"+stringname+"</p>");
+	}
+	else alert("読み込みError");
+
 }
 
 function load(src)
