@@ -5,7 +5,10 @@ function set_item(){
     var selected_id_json = {};
     var error = "";
 
-    data['voter'] = $("#voterid").val();
+    var voterinfo = $("#voterid").val();
+    var obj = JSON.parse(voterinfo);
+    data['voter_id'] = obj.voter_id.toString();
+    data['voter_name'] = obj.voter_name.toString();
 
     temp=JSON.parse(localStorage.getItem('Candidate_ID'));
     var count = 0; //チェックしている候補者数
@@ -39,7 +42,7 @@ function set_item(){
     localStorage.setItem('Vote_Info',JSON.stringify(newdata));
 
     var VoteInfo = JSON.parse(localStorage.getItem('Vote_Info'));
-    
+
     //QRコード表示ページに遷移
     $.mobile.changePage("#QRPage", {
         changeHash: true
