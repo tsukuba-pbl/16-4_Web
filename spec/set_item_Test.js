@@ -3,8 +3,11 @@ describe("set_item> ", function(){
 		beforeEach(function(){
 			spyOn(console, "log");
 		    var data = {};
+				var voteinfo = {"voter_name": "テスト", "voter_id": "test"};
+				var str_voteinfo = JSON.stringify(voteinfo);
+
 			$('body').append("<div id='voterid'></div>");
-			$("#voterid").val("example");
+			$("#voterid").val(str_voteinfo);
 		})
 		it("under_3", function(){
 			var selected_json = {
