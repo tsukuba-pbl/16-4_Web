@@ -5,15 +5,17 @@ function set_item(){
     var selected_id_json = {};
     var error = "";
     var data = {};
-
-    var voterinfo = $("#voterid").val();
-    var obj = JSON.parse(voterinfo);
-    data['voter_id'] = obj.voter_id.toString();
-    data['voter_name'] = obj.voter_name.toString();
-
     var checkId = $('#checkvote').val();
 
     temp=JSON.parse(localStorage.getItem('Candidate_ID'));
+
+    // 候補者が未選択の場合にエラー
+    if (temp === null) {
+      console.log ("temp = null");
+      alert ("候補者を選択してください");
+      return;
+    }
+
     var count = 0; //チェックしている候補者数
     //選択されているオブジェクトの値をselected_idに代入
     Object.keys(temp).forEach(function(key){
@@ -45,6 +47,13 @@ function set_item(){
         alert(error);
         return;
     }
+
+    var voterinfo = $("#voterid").val();
+    var obj = JSON.parse(voterinfo);
+    
+    data['voter_id'] = obj.voter_id.toString();
+    data['voter_name'] = obj.voter_name.toString();
+
     //voterのデータと投票のデータのマージ
     var newdata = $.extend(data,selected_id_json);
 
