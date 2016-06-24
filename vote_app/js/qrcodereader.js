@@ -76,7 +76,13 @@ function read(a)
 		$('#YourID').append("<p>ID:"+stringid+"</p>");
 		$('#YourID').append("<p>Name:"+stringname+"</p>");
 	}
-	else alert("読み込みError");
+	else {
+		alert("読み込みError");
+		$('#YourID').empty();
+		$('#YourID').append("<p>読み込みError</p>");
+	}
+
+
 
 }
 
