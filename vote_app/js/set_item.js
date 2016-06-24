@@ -11,7 +11,7 @@ function set_item(){
     data['voter_id'] = obj.voter_id.toString();
     data['voter_name'] = obj.voter_name.toString();
 
-    checkId = $('#checkvote').val();
+    var checkId = $('#checkvote').val();
 
     temp=JSON.parse(localStorage.getItem('Candidate_ID'));
     var count = 0; //チェックしている候補者数
