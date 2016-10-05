@@ -7,13 +7,18 @@ function set_item(){
     var data = {};
     var checkId = $('#checkvote').val();
 
-    temp=JSON.parse(localStorage.getItem('Candidate_ID'));
+    temp = JSON.parse(localStorage.getItem('Candidate_ID'));
+
+    // QRcodeが入力されていない場合、エラー
+    if (checkId === "0") {
+      console.log("data = null");
+      error = "正しいIDをQRコードから入力してください。";
+    }
 
     // 候補者が未選択の場合にエラー
     if (temp === null) {
       console.log ("temp = null");
       alert ("候補者を選択してください");
-      return;
     }
 
     var count = 0; //チェックしている候補者数
@@ -27,12 +32,6 @@ function set_item(){
             count++;
         }
     });
-
-    // QRcodeが入力されていない場合、エラー
-    if (checkId === "0") {
-      console.log("data = null");
-      error = "正しいIDをQRコードから入力してください。";
-    }
 
     // count数を見て候補者の選択数をチェック
     if(count < 3){
@@ -50,7 +49,7 @@ function set_item(){
 
     var voterinfo = $("#voterid").val();
     var obj = JSON.parse(voterinfo);
-    
+
     data['voter_id'] = obj.voter_id.toString();
     data['voter_name'] = obj.voter_name.toString();
 
