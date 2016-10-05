@@ -47,11 +47,22 @@ function read(a)
 {
 
 	var txt = a;
-	var judge = a.indexOf("voter_id");
-
+	var judge = false;
 	$('#checkvote').val(0);	// 正しいQRコードが入力されたかのflag用
 
-	if (judge != -1) {
+	try{
+		var obj = JSON.parse(txt);
+
+		if ('voter_id' in obj && 'voter_name' in obj) {
+			console.log("QRcode_true");
+			judge = true;
+		}
+	} catch(e) {
+		console.log("QRcode_false");
+		judge = false;
+	}
+
+	if (judge === true) {
 
 		// 引数"a"はQRコードで読み込んだ時の内容で文字コードが"SJIS"である。文字コードを変換する際に文字列を配列にする必要がある
 		var str2array = function (str) {

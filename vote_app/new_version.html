@@ -103,7 +103,10 @@
     var CandidateID = {};
     var data = {};
     var count;
-    $(document).on('pagecreate',function(e, d) {
+    $(document).on('pagecreate', '#mainPage', function(e, d) {
+
+      localStorage.removeItem("Candidate_ID");
+      localStorage.removeItem("Vote_Info");
 
         $.getJSON("data.json" , function(data) {
             var checkboxContents = "",
@@ -138,6 +141,16 @@
                 });
             });
         });
+      });
+
+      $(document).on('pageshow', '#mainPage',  function(e, d) {
+        console.log("test");
+        var candidate = JSON.parse(localStorage.getItem('Candidate_ID'));
+        for (key in candidate) {
+          console.log(key);
+          console.log('input[name="'+key+'"]');
+          $('input[name="'+key+'"]').attr('checked', true).checkboxradio('refresh');
+        }
       });
   </script>
 </body>
