@@ -17,7 +17,7 @@ module.exports = function(config) {
         'https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css',
         'https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js',
         'https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js',
-        'vote_app/js/set_item.js',
+        'public/js/set_item.js',
         'spec/set_item_Test.js'
     ],
 
