@@ -13,6 +13,7 @@ function set_item(){
 
     //現在チェックしている候補者数のカウント
     for (key in candidateId) {
+      selected_id_json["name_"+(count+1)] = candidateId[key];
       count++;
     }
 
@@ -45,7 +46,7 @@ function set_item(){
     data['voter_name'] = obj.voter_name.toString();
 
     //voterのデータと投票のデータのマージ
-    var newdata = $.extend(data,candidateId);
+    var newdata = $.extend(data,selected_id_json);
 
     //LocalStorageに投票者と候補者リストを'Vote_Info'の名前で保存
     localStorage.setItem('Vote_Info',JSON.stringify(newdata));
