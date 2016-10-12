@@ -4,8 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-
-<link rel="stylesheet" type="text/css" href="jquery.mobile.flatui.css" />
+  <link rel="stylesheet" type="text/css" href="jquery.mobile.flatui.css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
@@ -30,12 +29,22 @@
   <script type="text/javascript" src="./jsqrcode-master/src/databr.js"></script>
   <script type="text/javascript" src="./js/qrcodereader.js"></script>
   <script type="text/javascript" src="./js/encoding.js"></script>
+  <script type="text/javascript" src="./js/jquery.searcher.js"></script>
 
 </head>
 
 <body>
   <div data-role="page" role="main" id="mainPage">
-      <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push"></div>
+      <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
+      <h2>Ts_Quartetto</h2>
+      <br>
+      <p>Du Yan</p>
+      <p>Suzuki Kentaro</p>
+      <p>Tsuruda Tomohiro</p>
+      <p>Zhong Yuran</p>
+      <br>
+      <a href="#mainPage" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close</a>
+      </div>
       <div data-role="header">
           <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
           <h1>Vote Appication</h1>
@@ -51,24 +60,26 @@
       <div id="YourID">
       </div>
 
-      <!-- JSONファイルの候補者をリスト表示 -->
-
-
-          <ul data-role="listview" data-inset="true" >
+      <!-- 検索 -->
+          <input id="listsearchinput" type="text" placeholder="検索"/>
+          <ul data-role="listview" data-inset="true" id="listdata" >
           <li data-role="list-divider" data-theme="a">候補者リスト</li>
 
+          <!-- JSONファイルの候補者をリスト表示 -->
           <div data-role="fieldcontain">
               <fieldset data-role="controlgroup" id="my_controlgroup">
-
                   <div id="my_checkbox"></div>
               </fieldset>
       </div>
       </ul>
-    </section>
+      </div>
+
+
     <fieldset class="ui-grid-a">
     <button data-icon="flat-checkround" data-theme="e" onclick="set_item()">Save</button>
     </fieldset>
     <canvas id="qr-canvas" width="640" height="480"></canvas>
+
 
 </div>
 
@@ -85,12 +96,13 @@
       <div class="example" align="center">
         <div id="qrcode" align="center">
         </div>
+        <!-- 候補者を選択しなおす -->
+        <div class="ui-block-b"><button data-icon="flat-new" data-theme="d" onclick="go_back()">選択しなおす</button></div>
       </div>
     </div>
 
-
     <div data-role="footer">
-      <h1>ts_quartetto</h1>
+      <h1>Ts_Quartetto</h1>
     </div>
   </div>
 
@@ -133,8 +145,8 @@
                 NAME = data[i].name,
                 TITLE = data[i].title;
 
-                checkboxContents += '<input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/>'
-                checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + 'Name:' + NAME + 'Title:' + TITLE + '</label>';
+                checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
+                checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
             }
 
             checkboxContents += "</div>";
@@ -167,5 +179,24 @@
         }
       });
   </script>
+  <script>
+      $("#listdata").searcher({
+          itemSelector: "li",
+          textSelector: "",
+          inputSelector: "#listsearchinput"
+      });
+  </script>
+
+  <script>
+  function go_back(){
+      $.mobile.changePage("#mainPage", {
+          changeHash: true
+      });
+  }
+
+  </script>
+
+
+
 </body>
 </html>
