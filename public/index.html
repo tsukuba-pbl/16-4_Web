@@ -30,173 +30,116 @@
   <script type="text/javascript" src="./js/qrcodereader.js"></script>
   <script type="text/javascript" src="./js/encoding.js"></script>
   <script type="text/javascript" src="./js/jquery.searcher.js"></script>
-
+  <script type="text/javascript" src="./js/checked_checkbox.js"></script>
+  <script type="text/javascript" src="./js/create_list.js"></script>
+  <script type="text/javascript" src="./js/go_back.js"></script>
 </head>
 
 <body>
-  <div data-role="page" role="main" id="mainPage">
-      <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
-      <h2>Ts_Quartetto</h2>
-      <br>
-      <p>Du Yan</p>
-      <p>Suzuki Kentaro</p>
-      <p>Tsuruda Tomohiro</p>
-      <p>Zhong Yuran</p>
-      <br>
-      <a href="#mainPage" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close</a>
-      </div>
-      <div data-role="header">
-          <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
-          <h1>Vote Appication</h1>
-          <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
-      </div>
-    <!-- カメラで投票者ID入力 -->
-    <div data-role="content" class="ui-content">
-      <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
-      <input type="hidden" name="voterid" id="voterid" value="">
-      <input type="hidden" name="checkvote" id="checkvote" value="0">
-
-      <!--ID表示 -->
-      <div id="YourID">
-      </div>
-
-      <!-- 検索 -->
-          <input id="listsearchinput" type="text" placeholder="検索"/>
-          <div data-role="header" data-theme="b"><h4>候補者リスト</h4></div>
-          <ul data-role="listview" data-inset="true" id="listdata" >
-
-          <!-- JSONファイルの候補者をリスト表示 -->
-          <div data-role="fieldcontain">
-              <fieldset data-role="controlgroup" id="my_controlgroup">
-                  <div id="my_checkbox"></div>
-              </fieldset>
-      </div>
-      </ul>
-      </div>
-
-
-    <fieldset class="ui-grid-a">
-    <button data-icon="flat-checkround" data-theme="e" onclick="set_item()">Save</button>
-    </fieldset>
-    <canvas id="qr-canvas" width="640" height="480"></canvas>
-
-
-</div>
-
-  </div>
-
-  <!-- QRCodeを表示するページ -->
-  <div data-role="page" id="QRPage">
-
-    <div data-role="header">
-      <h1>QR Code</h1>
-    </div>
-
-    <div data-role="content" class="ui-content">
-      <div class="example" align="center">
-        <div id="qrcode" align="center">
+    <div data-role="page" role="main" id="mainPage">
+        <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
+            <h2>Ts_Quartetto</h2>
+            <br>
+            <p>Du Yan</p>
+            <p>Suzuki Kentaro</p>
+            <p>Tsuruda Tomohiro</p>
+            <p>Zhong Yuran</p>
+            <br>
+            <a href="#mainPage" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close</a>
         </div>
-        <!-- 候補者を選択しなおす -->
-        <div class="ui-block-b"><button data-icon="back" data-theme="d" onclick="go_back()">選択しなおす</button></div>
-      </div>
+        <div data-role="header">
+            <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+            <h1>Vote Appication</h1>
+            <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
+        </div>
+        <!-- カメラで投票者ID入力 -->
+        <div data-role="content" class="ui-content">
+            <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
+            <input type="hidden" name="voterid" id="voterid" value="">
+            <input type="hidden" name="checkvote" id="checkvote" value="0">
+
+            <!--ID表示 -->
+            <div id="YourID">
+            </div>
+
+            <!-- 検索 -->
+            <input id="listsearchinput" type="text" placeholder="検索"/>
+            <div data-role="header" data-theme="b"><h4>候補者リスト</h4></div>
+            <ul data-role="listview" data-inset="true" id="listdata" >
+                <!-- JSONファイルの候補者をリスト表示 -->
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" id="my_controlgroup">
+                        <div id="my_checkbox"></div>
+                    </fieldset>
+                </div>
+            </ul>
+        </div>
+
+        <fieldset class="ui-grid-a">
+            <button data-icon="flat-checkround" data-theme="e" onclick="set_item()">Save</button>
+        </fieldset>
+        <canvas id="qr-canvas" width="640" height="480"></canvas>
     </div>
 
-    <div data-role="footer">
-      <h1>Ts_Quartetto</h1>
+    <!-- QRCodeを表示するページ -->
+    <div data-role="page" id="QRPage">
+
+        <div data-role="header">
+          <h1>QR Code</h1>
+        </div>
+
+        <div data-role="content" class="ui-content">
+            <div class="example" align="center">
+                <div id="qrcode" align="center">
+                </div>
+                <!-- 候補者を選択しなおす -->
+                <div class="ui-block-b"><button data-icon="back" data-theme="d" onclick="go_back()">選択しなおす</button></div>
+            </div>
+        </div>
+
+        <div data-role="footer">
+            <h1>Ts_Quartetto</h1>
+        </div>
     </div>
-  </div>
+
+    <script>
+        $('#upfile').change(function(){
+
+            if (this.files.length > 0) {
+                // 選択されたファイル情報を取得
+                var file = this.files[0];
+
+                // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+
+                reader.onload = function(){
+                    load(reader.result);
+                    console.log(reader.result);
+                }
+            }
+        });
+    </script>
 
   <script>
-    $('#upfile').change(function(){
-
-      if (this.files.length > 0) {
-        // 選択されたファイル情報を取得
-        var file = this.files[0];
-
-        // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        reader.onload = function(){
-          load(reader.result);
-          console.log(reader.result);
-        }
-      }
+    $(document).on('pagecreate', '#mainPage', function(e, d) {
+      create_list();
     });
   </script>
 
   <script>
-    var CandidateID = {};
-    var data = {};
-    var count;
-    $(document).on('pagecreate', '#mainPage', function(e, d) {
-
-      localStorage.removeItem("Candidate_ID");
-      localStorage.removeItem("Vote_Info");
-
-        $.getJSON("data.json" , function(data) {
-            var checkboxContents = "",
-            len = data.length;
-
-            checkboxContents += "<div data-role='controlgroup'>";
-
-            for (var i=0; i<len; i++) {
-                var ID = data[i].id,
-                NAME = data[i].name,
-                TITLE = data[i].title;
-
-                checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
-                checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
-            }
-
-            checkboxContents += "</div>";
-            $("#my_checkbox").empty().append(checkboxContents).trigger("create");
-
-            $(document).ready(function() {
-                $("input[type='checkbox']").change(function () {
-                  if ($(this).is(":checked")) {
-                    count = $(this).attr('name');
-                    CandidateID[count] = $(this).val();
-                   }
-                  else {
-                    count = $(this).attr('name');
-                    delete CandidateID[count];
-
-                   }
-                  localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
-                });
-            });
-        });
-      });
-
-      $(document).on('pageshow', '#mainPage',  function(e, d) {
-        console.log("test");
-        var candidate = JSON.parse(localStorage.getItem('Candidate_ID'));
-        for (key in candidate) {
-          console.log(key);
-          console.log('input[name="'+key+'"]');
-          $('input[name="'+key+'"]').attr('checked', true).checkboxradio('refresh');
-        }
-      });
-  </script>
-  <script>
-      $("#listdata").searcher({
-          itemSelector: "li",
-          textSelector: "",
-          inputSelector: "#listsearchinput"
-      });
+    $(document).on('pageshow', '#mainPage',  function(e, d) {
+      checked_checkbox();
+    });
   </script>
 
   <script>
-  function go_back(){
-      $.mobile.changePage("#mainPage", {
-          changeHash: true
-      });
-  }
-
+    $("#listdata").searcher({
+        itemSelector: "li",
+        textSelector: "",
+        inputSelector: "#listsearchinput"
+    });
   </script>
-
-
 
 </body>
 </html>
