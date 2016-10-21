@@ -1,7 +1,5 @@
 function create_list() {
     var data = {};
-    localStorage.removeItem("Candidate_ID");
-    localStorage.removeItem("Vote_Info");
 
     $.getJSON("data.json" , function(data) {
         var checkboxContents = "", len = data.length;
