@@ -1,9 +1,10 @@
-function create_list() {
+function create_list(json_file) {
     var data = {};
     localStorage.removeItem("Candidate_ID");
     localStorage.removeItem("Vote_Info");
+    json_file = "aaa";
 
-    $.getJSON("webdb2015.json" , function(data, status) {
+    $.getJSON(json_file , function(data, status) {
         var checkboxContents = "";
         var ID, NAME, TITLE;
         var correct_json_flag = 0;
@@ -31,7 +32,6 @@ function create_list() {
                     return false;
                 }
             });
-            
             if (correct_json_flag === 1) {
                 console.log("success_json_file");
             }
@@ -74,7 +74,7 @@ function create_list() {
             });
         });
     }).fail(function() {
-      console.log("faild");
+      console.log("failed_read_json");
       $("#my_checkbox").append("<a>読み込みError</a>");
     });
 }
