@@ -33,6 +33,8 @@
   <script type="text/javascript" src="./js/checked_checkbox.js"></script>
   <script type="text/javascript" src="./js/create_list.js"></script>
   <script type="text/javascript" src="./js/go_back.js"></script>
+  <script type="text/javascript" src="./js/create_bookmark_list.js"></script>
+  <script type="text/javascript"> var json_file = "webdb2015.json"</script>
 </head>
 
 <body>
@@ -66,8 +68,8 @@
             <input id="listsearchinput" type="text" placeholder="検索"/>
             <div data-role="header" data-theme="b"><h4>候補者リスト</h4></div>
             <div data-role="controlgroup" data-type="horizontal">
-                <button class="ui-btn">ALL</button>
-                <button class="ui-btn">☆</button>
+                <button class="ui-btn" onclick="create_list(json_file)">ALL</button>
+                <button class="ui-btn" onclick="create_bookmark_list(json_file)">☆</button>
             </div>
             <ul data-role="listview" data-inset="true" id="listdata" >
                 <!-- JSONファイルの候補者をリスト表示 -->
@@ -129,13 +131,14 @@
     $(document).on('pagecreate', '#mainPage', function(e, d) {
         localStorage.removeItem("Candidate_ID");
         localStorage.removeItem("Vote_Info");
-        create_list();
+        create_list(json_file);
     });
   </script>
 
   <script>
     $(document).on('pageshow', '#mainPage',  function(e, d) {
-      checked_checkbox();
+        localStorage.setItem('bookmarks',"A1-01,A2-01,A3-01");
+        checked_checkbox();
     });
   </script>
 

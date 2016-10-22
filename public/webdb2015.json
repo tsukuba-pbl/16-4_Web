@@ -346,7 +346,7 @@
       "presenid" : "A1-01",
       "name" : "大山 敬三",
       "affiliation": "NII",
-      "first" : 1
+      "first" : 0
     },
     {
       "presenid" : "A3-01",
@@ -1922,4 +1922,3 @@
     }
   ]
 }
-
