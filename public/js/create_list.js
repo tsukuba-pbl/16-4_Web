@@ -2,43 +2,11 @@ function create_list(json_file) {
     var data = {};
     localStorage.removeItem("Candidate_ID");
     localStorage.removeItem("Vote_Info");
-    json_file = "aaa";
 
     $.getJSON(json_file , function(data, status) {
         var checkboxContents = "";
         var ID, NAME, TITLE;
         var correct_json_flag = 0;
-
-        //jsonファイル内に必要なkeyが含まれているか
-        if ('author' in data && 'presen' in data) {
-            correct_json_flag = 1;
-
-            $.each (data.author, function(i, test1) {
-                if('presenid' in test1 && 'name' in test1 && 'first' in test1) {
-                    correct_json_flag = 1;
-                }
-                else {
-                    correct_json_flag = 0;
-                    return false;
-                }
-            });
-
-            $.each (data.presen, function(j, test2) {
-                if ('presenid' in test2 && 'title' in test2) {
-                    correct_json_flag = 1;
-                }
-                else {
-                    correct_json_flag = 0;
-                    return false;
-                }
-            });
-            if (correct_json_flag === 1) {
-                console.log("success_json_file");
-            }
-            else {
-                console.log("fail_json_file");
-            }
-        }
 
         checkboxContents += "<div data-role='controlgroup'>";
 
@@ -73,8 +41,9 @@ function create_list(json_file) {
                 localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
             });
         });
-    }).fail(function() {
-      console.log("failed_read_json");
+    })
+    .fail(function() {
       $("#my_checkbox").append("<a>読み込みError</a>");
+      return false;
     });
 }
