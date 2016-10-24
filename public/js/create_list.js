@@ -9,7 +9,7 @@ function create_list(json_file) {
         checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
 
         var bookmark_list = localStorage.getItem("bookmarks");
-        if(bookmark_list != null) {
+        if(bookmark_list != null && bookmark_list.length > 1) {
             bookmark_list = bookmark_list.split(",");
         }
         $.each(data.author, function(i, item1) {

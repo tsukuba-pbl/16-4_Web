@@ -11,8 +11,9 @@ function create_bookmark_list(json_file) {
         var bookmark_list = localStorage.getItem("bookmarks");
 
         if (bookmark_list != null) {
-            bookmark_list = bookmark_list.split(",");
-
+            if (bookmark_list.length > 1) {
+                bookmark_list = bookmark_list.split(",");
+            }
             $.each(data.author, function(i, item1) {
                 ID = item1.presenid,
                 NAME = item1.name;
@@ -51,6 +52,7 @@ function create_bookmark_list(json_file) {
             });
         }
         else {
+            console.log("empty_bookmarks");
             $('#my_checkbox').empty().append("<a>ブックマークされていません</a>");
         }
     }).fail(function() {
