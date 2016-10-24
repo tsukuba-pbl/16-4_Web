@@ -8,7 +8,7 @@ function create_list(json_file) {
         var ID, NAME, TITLE;
         var correct_json_flag = 0;
 
-        checkboxContents += "<div data-role='controlgroup'>";
+        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
 
         $.each(data.author, function(i, item1) {
             ID = item1.presenid,
