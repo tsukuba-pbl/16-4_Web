@@ -23,7 +23,7 @@ function create_bookmark_list(json_file) {
                           if(item2.presenid === bookmark_list[k]) {
                               TITLE = item2.title;
                               checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
-                              checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
+                              checkboxContents += '<label for="jsform_checkbox' + i +'">★' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
                           }
                       });
                   }
