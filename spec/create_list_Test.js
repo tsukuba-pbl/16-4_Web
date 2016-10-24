@@ -5,11 +5,10 @@ describe("create_list> ", function(){
             $('body').append("<div id='my_checkbox'></div>");
 		})
 
-		//jsonファイルに必須キーが含まれているかのテスト。
-		it("correct_json_file", function() {
+		//jsonファイルが存在しないときに例外になるテスト
+		it("not-exist_json_file", function() {
             var json_file = "dammy_file.json";
-			create_list(json_file);
-			expect(console.log).toHaveBeenCalledWith("failed_read_json");
+			expect(create_list(json_file)).toThrow;
 		});
 	});
 });
