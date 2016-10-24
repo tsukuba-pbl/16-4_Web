@@ -9,9 +9,10 @@ function create_bookmark_list(json_file) {
         checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
 
         var bookmark_list = localStorage.getItem("bookmarks");
-        bookmark_list = bookmark_list.split(",");
 
         if (bookmark_list != null) {
+            bookmark_list = bookmark_list.split(",");
+
             $.each(data.author, function(i, item1) {
                 ID = item1.presenid,
                 NAME = item1.name;
@@ -48,6 +49,9 @@ function create_bookmark_list(json_file) {
                     localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
                 });
             });
+        }
+        else {
+            $('#my_checkbox').empty().append("<a>ブックマークされていません</a>");
         }
     }).fail(function() {
       console.log("failed_read_json");
