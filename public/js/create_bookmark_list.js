@@ -6,7 +6,7 @@ function create_bookmark_list(json_file) {
         var checkboxContents = "";
         var ID, NAME, TITLE;
 
-        checkboxContents += "<div data-role='controlgroup'>";
+        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
 
         var bookmark_list = localStorage.getItem("bookmarks");
         bookmark_list = bookmark_list.split(",");

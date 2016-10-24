@@ -6,7 +6,10 @@ function create_list(json_file) {
         var ID, NAME, TITLE;
         var correct_json_flag = 0;
 
-        checkboxContents += "<div data-role='controlgroup'>";
+        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
+
+        var bookmark_list = localStorage.getItem("bookmarks");
+        bookmark_list = bookmark_list.split(",");
 
         $.each(data.author, function(i, item1) {
             ID = item1.presenid,
@@ -16,7 +19,13 @@ function create_list(json_file) {
               if ( item1.first === 1 && item1.presenid === item2.presenid) {
                   TITLE = item2.title;
                   checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
-                  checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
+                  checkboxContents += '<label for="jsform_checkbox' + i +'">';
+                  $.each (bookmark_list, function(k, item3){
+                      if(item2.presenid === bookmark_list[k]) {
+                          checkboxContents +="★";
+                      }
+                  });
+                  checkboxContents +='ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
               }
             });
         });
