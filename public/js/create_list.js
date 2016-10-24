@@ -1,22 +1,27 @@
-function create_list() {
+function create_list(json_file) {
     var data = {};
     localStorage.removeItem("Candidate_ID");
     localStorage.removeItem("Vote_Info");
 
-    $.getJSON("data.json" , function(data) {
-        var checkboxContents = "", len = data.length;
+    $.getJSON(json_file , function(data, status) {
+        var checkboxContents = "";
         var ID, NAME, TITLE;
+        var correct_json_flag = 0;
 
-        checkboxContents += "<div data-role='controlgroup'>";
+        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
 
-        for (var i=0; i<len; i++) {
-            ID = data[i].id,
-            NAME = data[i].name,
-            TITLE = data[i].title;
+        $.each(data.author, function(i, item1) {
+            ID = item1.presenid,
+            NAME = item1.name;
 
-            checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
-            checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
-        }
+            $.each (data.presen, function(j, item2) {
+              if ( item1.first === 1 && item1.presenid === item2.presenid) {
+                  TITLE = item2.title;
+                  checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
+                  checkboxContents += '<label for="jsform_checkbox' + i +'">' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
+              }
+            });
+        });
 
         checkboxContents += "</div>";
         $("#my_checkbox").empty().append(checkboxContents).trigger("create");
@@ -36,5 +41,9 @@ function create_list() {
                 localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
             });
         });
+    })
+    .fail(function() {
+      $("#my_checkbox").append("<a>読み込みError</a>");
+      return false;
     });
 }
