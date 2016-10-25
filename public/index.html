@@ -131,6 +131,7 @@
     $(document).on('pagecreate', '#mainPage', function(e, d) {
         localStorage.removeItem("Candidate_ID");
         localStorage.removeItem("Vote_Info");
+        CandidateID = {};       //注意：：：：：グローバル変数：：：CandidateID
         create_list(json_file);
     });
   </script>

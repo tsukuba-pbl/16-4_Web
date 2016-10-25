@@ -7,8 +7,9 @@ function create_bookmark_list(json_file) {
         var ID, NAME, TITLE;
 
         checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
-
+;
         var bookmark_list = localStorage.getItem("bookmarks");
+        var CandidateId = JSON.parse(localStorage.getItem('Candidate_ID'));
 
         if (bookmark_list != null) {
             if (bookmark_list.length > 1) {
@@ -24,7 +25,13 @@ function create_bookmark_list(json_file) {
                       $.each (bookmark_list, function(k, item3){
                           if(item2.presenid === bookmark_list[k]) {
                               TITLE = item2.title;
-                              checkboxContents += '<li><input type="checkbox" data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
+                              checkboxContents += '<li><input type="checkbox" ';
+                              for (key in CandidateId) {
+                                  if (CandidateId[key] === item2.presenid) {
+                                      checkboxContents += 'checked="checked"';
+                                  }
+                              }
+                              checkboxContents += 'data-theme="c" id="jsform_checkbox'  + i + '" name="contender'+(i+1)+'"'+' value="'+ID+'"/></li>'
                               checkboxContents += '<label for="jsform_checkbox' + i +'">★' + 'ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
                           }
                       });
@@ -36,8 +43,9 @@ function create_bookmark_list(json_file) {
             $("#my_checkbox").empty().append(checkboxContents).trigger("create");
 
             $(document).ready(function() {
-                var CandidateID = {};
+
                 var count;
+
                 $("input[type='checkbox']").change(function () {
                     if ($(this).is(":checked")) {
                         count = $(this).attr('name');
