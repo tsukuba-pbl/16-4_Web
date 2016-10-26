@@ -33,7 +33,7 @@ function create_list(json_file) {
                           checkboxContents +="★";
                       }
                   });
-                  checkboxContents +='ID: ' + ID + '</br>' + ' Name: ' + NAME + '</br>' + ' Title:' + TITLE + '</label>';
+                  checkboxContents +='ID: ' + ID + '</br>' + ' Name: ' + NAME + '</br>' + ' Title: ' + TITLE + '</label>';
               }
             });
         });
