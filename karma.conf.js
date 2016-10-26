@@ -20,7 +20,9 @@ module.exports = function(config) {
         'public/js/set_item.js',
         'spec/set_item_Test.js',
         'public/js/create_list.js',
-        'spec/create_list_Test.js'
+        'spec/create_list_Test.js',
+        'public/js/create_bookmark_list.js',
+        'spec/create_bookmark_list_Test.js'
     ],
 
 

@@ -131,13 +131,14 @@
     $(document).on('pagecreate', '#mainPage', function(e, d) {
         localStorage.removeItem("Candidate_ID");
         localStorage.removeItem("Vote_Info");
+        CandidateID = {};       //注意：：：：：グローバル変数：：：CandidateID
         create_list(json_file);
     });
   </script>
 
   <script>
     $(document).on('pageshow', '#mainPage',  function(e, d) {
-        localStorage.setItem('bookmarks',"A1-01,A2-01,A3-01");
+        //localStorage.setItem('bookmarks',"A1-01,A2-01,A3-01");
         checked_checkbox();
     });
   </script>
