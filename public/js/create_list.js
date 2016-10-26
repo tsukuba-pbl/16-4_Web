@@ -11,7 +11,7 @@ function create_list(json_file) {
         }
         var CandidateId = JSON.parse(localStorage.getItem('Candidate_ID'));
 
-        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:70vh'>";
+        checkboxContents += "<div data-role='controlgroup' style='overflow-y:scroll;height:45vh'>";
 
         $.each(data.author, function(i, item1) {
             ID = item1.presenid,
@@ -33,7 +33,7 @@ function create_list(json_file) {
                           checkboxContents +="★";
                       }
                   });
-                  checkboxContents +='ID:' + ID + ' Name:' + NAME + ' Title:' + TITLE + '</label>';
+                  checkboxContents +='ID: ' + ID + '</br>' + ' Name: ' + NAME + '</br>' + ' Title:' + TITLE + '</label>';
               }
             });
         });
