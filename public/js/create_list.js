@@ -18,7 +18,7 @@ function create_list(json_file) {
             NAME = item1.name;
 
             $.each (data.presen, function(j, item2) {
-              if (item1.presenid === item2.presenid) {
+              if ( item1.first === 1 && item1.presenid === item2.presenid) {
                   TITLE = item2.title;
                   checkboxContents += '<li><input type="checkbox" ';
                   for (key in CandidateId) {
