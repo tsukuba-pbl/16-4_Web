@@ -80,7 +80,9 @@ function read(a)
 		var stringid = obj.voter_id.toString();
 		var stringname = obj.voter_name.toString();
 
+
 		alert("ID:"+stringid+", Name"+stringname+"を読み込みました。");
+
 		$('#checkvote').val(1);	//正しいQRコードがセットされたときに"1"を送る
 		$('#voterid').val(txt);	//QRコードの内容をinputタグのhiddenに入力する
 		$('#YourID').empty();
