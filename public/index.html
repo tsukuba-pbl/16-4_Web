@@ -56,7 +56,11 @@
         </div>
         <!-- カメラで投票者ID入力 -->
         <div data-role="content" class="ui-content">
-            <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile">
+            <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile" style="display:none">
+            <label for="upfile">
+                <div id="upfile" class="ui-btn ui-btn-f ui-btn ui-icon-action ui-btn-icon-left ui-shadow ui-corner-all">投票者情報の読み込み (QR
+                    コード)</div>
+            </label>
             <input type="hidden" name="voterid" id="voterid" value="">
             <input type="hidden" name="checkvote" id="checkvote" value="0">
 
@@ -149,6 +153,9 @@
         textSelector: "",
         inputSelector: "#listsearchinput"
     });
+    $(document).ready(function(){
+        $('input[type="file"]').parent('div.ui-input-text').hide();
+    })
   </script>
 
 </body>
