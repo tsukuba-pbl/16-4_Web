@@ -8,8 +8,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-  <script type="text/javascript" src="js/qrcode.js"></script>
-  <script type="text/javascript" src="js/set_item.js"></script>
+
+ <!-- QRcodeを読み取るjavascriptファイル群 -->
   <script type="text/javascript" src="./jsqrcode-master/src/grid.js"></script>
   <script type="text/javascript" src="./jsqrcode-master/src/version.js"></script>
   <script type="text/javascript" src="./jsqrcode-master/src/detector.js"></script>
@@ -27,18 +27,26 @@
   <script type="text/javascript" src="./jsqrcode-master/src/findpat.js"></script>
   <script type="text/javascript" src="./jsqrcode-master/src/alignpat.js"></script>
   <script type="text/javascript" src="./jsqrcode-master/src/databr.js"></script>
+  <script type="text/javascript" src="./js/qrcode.js"></script>
   <script type="text/javascript" src="./js/qrcodereader.js"></script>
   <script type="text/javascript" src="./js/encoding.js"></script>
+ <!--------------------------------------------------------------------------------------->
+
   <script type="text/javascript" src="./js/jquery.searcher.js"></script>
-  <script type="text/javascript" src="./js/checked_checkbox.js"></script>
+
+ <!-- 自作関数 -->
+  <script type="text/javascript" src="./js/set_item.js"></script>
   <script type="text/javascript" src="./js/create_list.js"></script>
   <script type="text/javascript" src="./js/go_back.js"></script>
   <script type="text/javascript" src="./js/create_bookmark_list.js"></script>
+  <script type="text/javascript" src="./js/count_checked.js"></script>
+  <script type="text/javascript" src="./js/read_candidateid_QR.js"></script>
   <script type="text/javascript"> var json_file = "pbl.json"</script>
 </head>
 
 <body>
     <div data-role="page" role="main" id="mainPage">
+        <!-- headder部分 ----------------------------------------------->
         <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
             <h2>Ts_Quartetto</h2>
             <br>
@@ -54,8 +62,10 @@
             <h1>Vote Appication</h1>
             <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
         </div>
-        <!-- カメラで投票者ID入力 -->
+
         <div data-role="content" class="ui-content">
+
+            <!-- カメラで投票者ID入力 -------------------->
             <input type="file" accept="image/*" capture="camera" name="upfile" id="upfile" style="display:none">
             <label for="upfile">
                 <div id="upfile" class="ui-btn ui-btn-f ui-btn ui-icon-action ui-btn-icon-left ui-shadow ui-corner-all">投票者情報の読み込み (QR
@@ -64,36 +74,36 @@
             <input type="hidden" name="voterid" id="voterid" value="">
             <input type="hidden" name="checkvote" id="checkvote" value="0">
 
-            <!--ID表示 -->
+            <!--ID表示 ------------------------------->
             <div id="YourID">
             </div>
 
-            <!-- 検索 -->
+            <!-- 検索 -------------------------------->
             <input id="listsearchinput" type="text" placeholder="検索"/>
             <div data-role="header" data-theme="b"><h4>候補者リスト</h4></div>
             <div data-role="controlgroup" data-type="horizontal">
                 <button class="ui-btn" onclick="create_list(json_file)">ALL</button>
                 <button class="ui-btn" onclick="create_bookmark_list(json_file)">☆</button>
             </div>
+
+            <!-- JSONファイルの候補者をリスト表示 ---------->
             <ul data-role="listview" data-inset="true" id="listdata" >
-                <!-- JSONファイルの候補者をリスト表示 -->
-
-                    <fieldset data-role="content" id="my_controlgroup">
-                        <div id="my_checkbox"></div>
-                    </fieldset>
-
+                <fieldset data-role="content" id="my_controlgroup">
+                    <div id="my_checkbox"></div>
+                </fieldset>
             </ul>
-        </div>
 
-        <fieldset class="ui-grid-a">
-            <button data-icon="flat-checkround" data-theme="e" onclick="set_item()">Save</button>
-        </fieldset>
-        <canvas id="qr-canvas" width="640" height="480"></canvas>
+            <!-- Saveボタンの表示 ---------------------------->
+            <fieldset class="ui-grid-a">
+                <button data-icon="flat-checkround" data-theme="e" onclick="set_item()">Save</button>
+            </fieldset>
+            <canvas id="qr-canvas" width="640" height="480"></canvas>
+        </div>
     </div>
 
+    <!-- page切り替わる -->
     <!-- QRCodeを表示するページ -->
     <div data-role="page" id="QRPage">
-
         <div data-role="header">
           <h1>QR Code</h1>
         </div>
@@ -112,50 +122,23 @@
         </div>
     </div>
 
-    <script>
-        $('#upfile').change(function(){
-
-            if (this.files.length > 0) {
-                // 選択されたファイル情報を取得
-                var file = this.files[0];
-
-                // readerのresultプロパティに、データURLとしてエンコードされたファイルデータを格納
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-
-                reader.onload = function(){
-                    load(reader.result);
-                    console.log(reader.result);
-                }
-            }
-        });
-    </script>
-
   <script>
     $(document).on('pagecreate', '#mainPage', function(e, d) {
         localStorage.removeItem("Candidate_ID");
         localStorage.removeItem("Vote_Info");
+        localStorage.setItem('bookmarks',"AIT-02");
         CandidateID = {};       //注意：：：：：グローバル変数：：：CandidateID
         create_list(json_file);
     });
-  </script>
 
-  <script>
-    $(document).on('pageshow', '#mainPage',  function(e, d) {
-        localStorage.setItem('bookmarks',"AIT-02");
-        checked_checkbox();
-    });
-  </script>
-
-  <script>
-    $("#listdata").searcher({
-        itemSelector: "li",
-        textSelector: "",
-        inputSelector: "#listsearchinput"
-    });
-    $(document).ready(function(){
+    $(document).ready(function() {
+        $("#listdata").searcher({
+            itemSelector: "li",
+            textSelector: "",
+            inputSelector: "#listsearchinput"
+        });
         $('input[type="file"]').parent('div.ui-input-text').hide();
-    })
+    });
   </script>
 
 </body>

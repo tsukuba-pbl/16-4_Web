@@ -41,23 +41,6 @@ function create_bookmark_list(json_file) {
 
             checkboxContents += "</div>";
             $("#my_checkbox").empty().append(checkboxContents).trigger("create");
-
-            $(document).ready(function() {
-
-                var count;
-
-                $("input[type='checkbox']").change(function () {
-                    if ($(this).is(":checked")) {
-                        count = $(this).attr('name');
-                        CandidateID[count] = $(this).val();
-                    }
-                    else {
-                        count = $(this).attr('name');
-                        delete CandidateID[count];
-                    }
-                    localStorage.setItem('Candidate_ID',JSON.stringify(CandidateID));
-                });
-            });
         }
         else {
             console.log("empty_bookmarks");
