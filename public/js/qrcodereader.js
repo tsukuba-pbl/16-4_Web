@@ -105,8 +105,8 @@ function read(a)
 function load(src)
 {
 	initCanvas(640,480);
-	qrcode.callback = read;
 	qrcode.decode(src);
+	qrcode.callback = read;
 }
 
 function initCanvas(ww,hh){
